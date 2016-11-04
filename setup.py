@@ -11,6 +11,7 @@ setup(
     packages=['iceact'],
     version='0.0.1',
     install_requires=[
+        'eventio>=0.2.1',
     ],
     setup_requires=['pytest-runner'],
     tests_require=['pytest>=3.0.0'],
