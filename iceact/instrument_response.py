@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 from scipy.spatial import KDTree
 from argparse import ArgumentParser
+from iceact.plotting import plot_camera
+import matplotlib.pyplot as plt
 
 
 parser = ArgumentParser()
@@ -41,7 +43,7 @@ def count_photons_per_pixel(pixels, num_pixel):
     return num_photons[:-1]
 
 
-if __name__ == '__main__':
+def main():
     args = parser.parse_args()
     response, tree = load_response(args.response_file, num_pixel=61)
 
@@ -51,7 +53,12 @@ if __name__ == '__main__':
 
     selected_photons = select_hit_photons(photons)
     pixels = calculated_detection_pixel(selected_photons, response, tree)
-    detected = pixels < 61
-    print(pixels[detected])
-    num_photons = np.bincount(pixels)
-    print(num_photons)
+    num_photons = count_photons_per_pixel(pixels, num_pixel=61)
+
+    c = plot_camera(num_photons)
+    plt.colorbar(c)
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
