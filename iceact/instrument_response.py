@@ -26,7 +26,7 @@ def load_response(file_name, num_pixel):
 def select_hit_photons(photons):
     '''select photons which hit the camera '''
     r = np.sqrt(photons['x']**2 + photons['y']**2)
-    mask = r < 25.35
+    mask = r < 27.485
     return photons[mask]
 
 
